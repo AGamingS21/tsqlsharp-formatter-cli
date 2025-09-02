@@ -19,15 +19,19 @@ namespace tsqlsharpcli
 
             pathOption.AddAlias("-p");
 
+            var outputPathOption = new Option<string>("--output", "The output path for the file sql file.");
+            outputPathOption.AddAlias("-o");
+
 
             var configureSubCommand = new Command("format", "format the file passed to the cli.");
             // Handles what happens when configure is called
             configureSubCommand.AddOption(pathOption);
-            configureSubCommand.SetHandler((path) =>
+            configureSubCommand.AddOption(outputPathOption);
+            configureSubCommand.SetHandler((path, output) =>
             {
                 if (File.Exists(path))
                 {
-                    Format(path);
+                    Format(path, output);
                 }
                 else
                 {
@@ -35,19 +39,27 @@ namespace tsqlsharpcli
                 }
 
             },
-            pathOption);
+            pathOption, outputPathOption);
 
             rootCommand.Add(configureSubCommand);
 
             return rootCommand.Invoke(args);
         }
 
-        static void Format(string path)
+        static void Format(string path, string outputPath)
         {
+            if (outputPath == "")
+            {
+                outputPath = path;
+            }
             var formatter = new Formatter();
 
             var output = formatter.Format(path);
             
+            using (StreamWriter outputFile = new StreamWriter(outputPath, false))
+            {
+                outputFile.WriteLine(output);
+            }   
         }
 
         

@@ -1,22 +1,33 @@
 {
     "configurations": [
         {
-            "name": "Format Command",
+            "name": "Help Command",
             "type": "coreclr",
             "request": "launch",
-            "launchSettingsProfile": "Format",
+            "launchSettingsProfile": "help",
+            "preLaunchTask": "dotnet: build",
             "program": "${workspaceFolder}/src/bin/Debug/net9.0/tsqlsharp-formatter-cli.dll",
-            "preLaunchTask": "dotnet: build /home/andrew/repos/tsqlsharp-formatter-cli/src/tsqlsharp-formatter-cli.csproj",
             "justMyCode": false,
             "launchSettingsFilePath": "${workspaceFolder}/src/Properties/launchSettings.json",
             "logging": {"moduleLoad": false}
         },
         {
-            "name": "Help Command",
+            "name": "Format Command",
             "type": "coreclr",
             "request": "launch",
-            "launchSettingsProfile": "help",
-            "preLaunchTask": "dotnet: build /home/andrew/repos/tsqlsharp-formatter-cli/src/tsqlsharp-formatter-cli.csproj",
+            "launchSettingsProfile": "Format",
+            "program": "${workspaceFolder}/src/bin/Debug/net9.0/tsqlsharp-formatter-cli.dll",
+            "preLaunchTask": "dotnet: build",
+            "justMyCode": false,
+            "launchSettingsFilePath": "${workspaceFolder}/src/Properties/launchSettings.json",
+            "logging": {"moduleLoad": false}
+        },
+        {
+            "name": "Format Command with Output",
+            "type": "coreclr",
+            "request": "launch",
+            "launchSettingsProfile": "FormatWithOutput",
+            "preLaunchTask": "dotnet: build",
             "program": "${workspaceFolder}/src/bin/Debug/net9.0/tsqlsharp-formatter-cli.dll",
             "justMyCode": false,
             "launchSettingsFilePath": "${workspaceFolder}/src/Properties/launchSettings.json",
