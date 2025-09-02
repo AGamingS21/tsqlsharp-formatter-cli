@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "Format": {
+      "commandName": "Project",
+      "commandLineArgs": "format --path ./tests/scripts/select.sql"
+    },
+    "help": {
+      "commandName": "Project",
+      "commandLineArgs": ""
+    }
+  }
+}
+
