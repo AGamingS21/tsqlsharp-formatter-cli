@@ -1,0 +1,39 @@
+name: Linux Release Pipeline
+
+on:
+  release:
+    types: [published]
+  
+env:
+  DOTNET_VERSION: '9.x'
+  SOLUTION_PATH: 'tsqlsharpcli.sln'
+  PROJECT_PATH: 'src/tsqlsharp-formatter-cli.csproj'
+
+jobs:
+      
+  build:
+    runs-on: ubuntu-latest 
+
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Restore
+        run: dotnet restore ${{ env.SOLUTION_PATH }}
+
+      - name: Build
+        run: dotnet build ${{ env.SOLUTION_PATH }}
+          --configuration Release
+      
+      - name: publish
+        run: dotnet publish -r linux-x64 -c Release -p:PublishSingleFile=true -p:AssemblyName=tsqlsharp-formatter
+    
+      - name: Upload Release Asset
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run:
+          gh release upload ${{ github.event.release.tag_name }} src/bin/Release/net9.0/linux-x64/publish/tsqlsharp-formatter
