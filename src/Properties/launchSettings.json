@@ -1,0 +1,18 @@
+{
+  "profiles": {
+    "Format": {
+      "commandName": "Project",
+      "commandLineArgs": "format --path ./tests/scripts/select.sql"
+    },
+    "FormatWithOutput": {
+      "commandName": "Project",
+      "commandLineArgs": "format --path ./tests/scripts/select.sql --output ./tests/formatted/selectFormated.sql"
+    },
+    "help": {
+      "commandName": "Project",
+      "commandLineArgs": ""
+    }
+  }
+  
+}
+
