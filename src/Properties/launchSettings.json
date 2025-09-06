@@ -1,12 +1,16 @@
 {
   "profiles": {
-    "Format": {
+    "FormatFile": {
       "commandName": "Project",
-      "commandLineArgs": "format --path ./tests/scripts/select.sql"
+      "commandLineArgs": "file --path ./tests/scripts/select.sql"
     },
-    "FormatWithOutput": {
+    "FormatFileWithOutput": {
       "commandName": "Project",
-      "commandLineArgs": "format --path ./tests/scripts/select.sql --output ./tests/formatted/selectFormated.sql"
+      "commandLineArgs": "file --path ./tests/scripts/select.sql --output ./tests/formatted/selectFormated.sql"
+    },
+    "FormatText": {
+      "commandName": "Project",
+      "commandLineArgs": "text --input \"select * from dbo.test\""
     },
     "help": {
       "commandName": "Project",
