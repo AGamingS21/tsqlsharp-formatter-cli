@@ -53,8 +53,12 @@ namespace tsqlsharpcli
                 outputPath = path;
             }
             var formatter = new Formatter();
+            var output = "";
+            using (var streamReader = new StreamReader(path))
+            {
+                output = formatter.Format(streamReader.ReadToEnd());
+            }
 
-            var output = formatter.Format(path);
             
             using (StreamWriter outputFile = new StreamWriter(outputPath, false))
             {

@@ -33,9 +33,14 @@ jobs:
       
       - name: publish
         run: dotnet publish -r linux-x64 -c Release -p:PublishSingleFile=true -p:AssemblyName=tsqlsharp-formatter
-    
+
+      - name: package cli
+        run: | 
+          chmod +x src/bin/Release/net9.0/linux-x64/publish/tsqlsharp-formatter
+          tar -czvf tsqlsharp-formatter-${{ github.event.release.tag_name }}-linux-amd64.tar.gz src/bin/Release/net9.0/linux-x64/publish/tsqlsharp-formatter
+
       - name: Upload Release Asset
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run:
-          gh release upload ${{ github.event.release.tag_name }} src/bin/Release/net9.0/linux-x64/publish/tsqlsharp-formatter
+          gh release upload ${{ github.event.release.tag_name }} tsqlsharp-formatter-${{ github.event.release.tag_name }}-linux-amd64.tar.gz
